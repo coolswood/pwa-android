@@ -3,7 +3,7 @@ package at.xtools.pwawrapper;
 public class Constants {
     public Constants(){}
     // Root page
-    public static String WEBAPP_URL = "https://mind-healthy.ru/";
+    public static String WEBAPP_URL = "https://mind-health.ru/";
     public static String WEBAPP_HOST = "mind-healthy.ru"; // used for checking Intent-URLs
 
 	// User Agent tweaks
