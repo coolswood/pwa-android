@@ -20,6 +20,8 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import java.util.Objects;
+
 import at.xtools.pwawrapper.Constants;
 import at.xtools.pwawrapper.R;
 import at.xtools.pwawrapper.ui.UIManager;
@@ -82,8 +84,6 @@ public class WebViewHelper {
         webSettings.setSupportMultipleWindows(true);
 
         webSettings.setDomStorageEnabled(true);
-        webSettings.setAppCachePath(activity.getApplicationContext().getCacheDir().getAbsolutePath());
-        webSettings.setAppCacheEnabled(true);
         webSettings.setDatabaseEnabled(true);
 
         // enable mixed content mode conditionally
@@ -144,7 +144,7 @@ public class WebViewHelper {
                 // new API method calls this on every error for each resource.
                 // we only want to interfere if the page itself got problems.
                 String url = request.getUrl().toString();
-                if (view.getUrl().equals(url)) {
+                if (Objects.equals(view.getUrl(), url)) {
                     handleLoadError(error.getErrorCode());
                 }
             }
