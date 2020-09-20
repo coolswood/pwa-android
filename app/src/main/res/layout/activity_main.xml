@@ -46,16 +46,18 @@
     <LinearLayout
         android:id="@+id/launcher"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="170dp"
         android:layout_centerInParent="true"
+        android:layout_centerVertical="true"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         android:visibility="invisible">
 
         <ImageView
-            android:src="@mipmap/ic_launcher"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:src="@mipmap/ic_launcher" />
 
     </LinearLayout>
 
