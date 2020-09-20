@@ -21,17 +21,17 @@ public class UIManager {
     // Instance variables
     private Activity activity;
     private WebView webView;
-    private ProgressBar progressSpinner;
     private ProgressBar progressBar;
     private LinearLayout offlineContainer;
+    private LinearLayout launcher;
     private boolean pageLoaded = false;
 
     public UIManager(Activity activity) {
         this.activity = activity;
         this.progressBar = (ProgressBar) activity.findViewById(R.id.progressBarBottom);
-        this.progressSpinner = (ProgressBar) activity.findViewById(R.id.progressSpinner);
         this.offlineContainer = (LinearLayout) activity.findViewById(R.id.offlineContainer);
         this.webView = (WebView) activity.findViewById(R.id.webView);
+        this.launcher = (LinearLayout) activity.findViewById(R.id.launcher);
 
         // set click listener for offline-screen
         offlineContainer.setOnClickListener(new View.OnClickListener() {
@@ -68,12 +68,12 @@ public class UIManager {
     // Show loading animation screen while app is loading/caching the first time
     public void setLoading(boolean isLoading) {
         if (isLoading) {
-            progressSpinner.setVisibility(View.VISIBLE);
+            launcher.setVisibility(View.VISIBLE);
             webView.animate().translationX(Constants.SLIDE_EFFECT).alpha(0.5F).setInterpolator(new AccelerateInterpolator()).start();
         } else {
             webView.setTranslationX(Constants.SLIDE_EFFECT * -1);
             webView.animate().translationX(0).alpha(1F).setInterpolator(new DecelerateInterpolator()).start();
-            progressSpinner.setVisibility(View.INVISIBLE);
+            launcher.setVisibility(View.INVISIBLE);
         }
         pageLoaded = !isLoading;
     }
@@ -92,21 +92,19 @@ public class UIManager {
 
     // set icon in recent activity view to a white one to be visible in the app bar
     public void changeRecentAppsIcon() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Bitmap iconWhite = BitmapFactory.decodeResource(activity.getResources(), R.drawable.ic_appbar);
+        Bitmap iconWhite = BitmapFactory.decodeResource(activity.getResources(), R.drawable.ic_appbar);
 
-            TypedValue typedValue = new TypedValue();
-            Resources.Theme theme = activity.getTheme();
-            theme.resolveAttribute(R.attr.colorPrimary, typedValue, true);
-            int color = typedValue.data;
+        TypedValue typedValue = new TypedValue();
+        Resources.Theme theme = activity.getTheme();
+        theme.resolveAttribute(R.attr.colorPrimary, typedValue, true);
+        int color = typedValue.data;
 
-            ActivityManager.TaskDescription description = new ActivityManager.TaskDescription(
-                    activity.getResources().getString(R.string.app_name),
-                    iconWhite,
-                    color
-            );
-            activity.setTaskDescription(description);
-            iconWhite.recycle();
-        }
+        ActivityManager.TaskDescription description = new ActivityManager.TaskDescription(
+                activity.getResources().getString(R.string.app_name),
+                iconWhite,
+                color
+        );
+        activity.setTaskDescription(description);
+        iconWhite.recycle();
     }
 }

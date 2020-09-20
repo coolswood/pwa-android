@@ -23,8 +23,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:tint="@color/colorPrimary"
-            app:srcCompat="@drawable/ic_cloud_off_black_48dp" />
+            app:srcCompat="@drawable/ic_cloud_off_black_48dp"
+            app:tint="@color/colorPrimary" />
 
         <TextView
             android:id="@+id/offlineHeading"
@@ -43,14 +43,21 @@
 
     </LinearLayout>
 
-    <ProgressBar
-        android:id="@+id/progressSpinner"
-        style="?android:attr/progressBarStyle"
+    <LinearLayout
+        android:id="@+id/launcher"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:indeterminate="true"
-        android:indeterminateTint="@color/colorPrimary" />
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:visibility="invisible">
+
+        <ImageView
+            android:src="@mipmap/ic_launcher"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content" />
+
+    </LinearLayout>
 
     <WebView
         android:layout_width="match_parent"
