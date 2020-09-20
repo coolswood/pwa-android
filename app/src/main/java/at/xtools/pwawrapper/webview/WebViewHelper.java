@@ -81,21 +81,13 @@ public class WebViewHelper {
         // must be set for our js-popup-blocker:
         webSettings.setSupportMultipleWindows(true);
 
-        // PWA settings
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
-            webSettings.setDatabasePath(activity.getApplicationContext().getFilesDir().getAbsolutePath());
-        }
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR2) {
-            webSettings.setAppCacheMaxSize(Long.MAX_VALUE);
-        }
         webSettings.setDomStorageEnabled(true);
         webSettings.setAppCachePath(activity.getApplicationContext().getCacheDir().getAbsolutePath());
         webSettings.setAppCacheEnabled(true);
         webSettings.setDatabaseEnabled(true);
 
         // enable mixed content mode conditionally
-        if (Constants.ENABLE_MIXED_CONTENT
-                && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        if (Constants.ENABLE_MIXED_CONTENT) {
             webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_COMPATIBILITY_MODE);
         }
 
@@ -146,25 +138,14 @@ public class WebViewHelper {
                 handleUrlLoad(view, url);
             }
 
-            // handle loading error by showing the offline screen
-            @Deprecated
-            @Override
-            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
-                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-                    handleLoadError(errorCode);
-                }
-            }
-
             @TargetApi(Build.VERSION_CODES.M)
             @Override
             public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    // new API method calls this on every error for each resource.
-                    // we only want to interfere if the page itself got problems.
-                    String url = request.getUrl().toString();
-                    if (view.getUrl().equals(url)) {
-                        handleLoadError(error.getErrorCode());
-                    }
+                // new API method calls this on every error for each resource.
+                // we only want to interfere if the page itself got problems.
+                String url = request.getUrl().toString();
+                if (view.getUrl().equals(url)) {
+                    handleLoadError(error.getErrorCode());
                 }
             }
         });
