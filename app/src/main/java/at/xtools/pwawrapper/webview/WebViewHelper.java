@@ -135,7 +135,6 @@ public class WebViewHelper {
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
-                handleUrlLoad(view, url);
             }
 
             @TargetApi(Build.VERSION_CODES.M)
@@ -179,37 +178,6 @@ public class WebViewHelper {
                     goBack();
                 }
             }, 100);
-        }
-    }
-
-    // handle external urls
-    private boolean handleUrlLoad(WebView view, String url) {
-        // prevent loading content that isn't ours
-        if (!url.startsWith(Constants.WEBAPP_URL)) {
-            // stop loading
-            // stopping only would cause the PWA to freeze, need to reload the app as a workaround
-            view.stopLoading();
-            view.reload();
-
-            // open external URL in Browser/3rd party apps instead
-            try {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                if (intent.resolveActivity(activity.getPackageManager()) != null) {
-                    activity.startActivity(intent);
-                } else {
-                    showNoAppDialog(activity);
-                }
-            } catch (Exception e) {
-                showNoAppDialog(activity);
-            }
-            // return value for shouldOverrideUrlLoading
-            return true;
-        } else {
-            // let WebView load the page!
-            // activate loading animation screen
-            uiManager.setLoading(true);
-            // return value for shouldOverrideUrlLoading
-            return false;
         }
     }
 
