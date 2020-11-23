@@ -67,14 +67,14 @@ public class UIManager {
 
     // Show loading animation screen while app is loading/caching the first time
     public void setLoading(boolean isLoading) {
-        if (isLoading) {
-            launcher.setVisibility(View.VISIBLE);
-            webView.animate().translationX(Constants.SLIDE_EFFECT).alpha(0.5F).setInterpolator(new AccelerateInterpolator()).start();
-        } else {
-            webView.setTranslationX(Constants.SLIDE_EFFECT * -1);
-            webView.animate().translationX(0).alpha(1F).setInterpolator(new DecelerateInterpolator()).start();
-            launcher.setVisibility(View.INVISIBLE);
-        }
+//        if (isLoading) {
+//            launcher.setVisibility(View.VISIBLE);
+//            webView.animate().translationX(Constants.SLIDE_EFFECT).alpha(0.5F).setInterpolator(new AccelerateInterpolator()).start();
+//        } else {
+//            webView.setTranslationX(Constants.SLIDE_EFFECT * -1);
+//            webView.animate().translationX(0).alpha(1F).setInterpolator(new DecelerateInterpolator()).start();
+//            launcher.setVisibility(View.INVISIBLE);
+//        }
         pageLoaded = !isLoading;
     }
 
