@@ -22,7 +22,6 @@ import android.webkit.WebViewClient;
 import java.util.Objects;
 
 import at.xtools.pwawrapper.Constants;
-import at.xtools.pwawrapper.MainActivity;
 import at.xtools.pwawrapper.R;
 import at.xtools.pwawrapper.ui.UIManager;
 
@@ -95,18 +94,6 @@ public class WebViewHelper {
 
         // retrieve content from cache primarily if not connected
         forceCacheIfOffline();
-
-        // set User Agent
-        if (Constants.OVERRIDE_USER_AGENT || Constants.POSTFIX_USER_AGENT) {
-            String userAgent = webSettings.getUserAgentString();
-            if (Constants.OVERRIDE_USER_AGENT) {
-                userAgent = Constants.USER_AGENT;
-            }
-            if (Constants.POSTFIX_USER_AGENT) {
-                userAgent = userAgent + " " + Constants.USER_AGENT_POSTFIX;
-            }
-            webSettings.setUserAgentString(userAgent);
-        }
 
         // enable HTML5-support
         webView.setWebChromeClient(new WebChromeClient() {
