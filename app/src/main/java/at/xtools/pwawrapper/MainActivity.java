@@ -1,9 +1,12 @@
 package at.xtools.pwawrapper;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.webkit.JavascriptInterface;
 
 import com.google.android.play.core.review.ReviewInfo;
 import com.google.android.play.core.review.ReviewManager;
@@ -34,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         // Setup App
         webViewHelper.setupWebView();
         uiManager.changeRecentAppsIcon();
+        webViewHelper.webView.addJavascriptInterface(new JavaScriptInterface(this), "androidInterface");
 
         // Check for Intents
         try {
@@ -78,22 +82,38 @@ public class MainActivity extends AppCompatActivity {
     // Handle back-press in browser
     @Override
     public void onBackPressed() {
-        manager = ReviewManagerFactory.create(this);
-
-        Task<ReviewInfo> request = manager.requestReviewFlow();
-        request.addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                ReviewInfo reviewInfo = task.getResult();
-                Task<Void> flow = manager.launchReviewFlow(this, reviewInfo);
-                flow.addOnCompleteListener(res -> {
-                    // The flow has finished. The API does not indicate whether the user
-                    // reviewed or not, or even whether the review dialog was shown. Thus, no
-                    // matter the result, we continue our app flow.
-                });
-            }
-        });
         if (!webViewHelper.goBack()) {
             super.onBackPressed();
+        }
+    }
+
+    public class JavaScriptInterface {
+
+        Context mContext;
+
+        /** Instantiate the interface and set the context */
+        JavaScriptInterface(Context c) {
+            mContext = c;
+        }
+
+        @JavascriptInterface
+        public void showRatePopup() {
+
+            manager = ReviewManagerFactory.create(mContext);
+
+            Task<ReviewInfo> request = manager.requestReviewFlow();
+            request.addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    ReviewInfo reviewInfo = task.getResult();
+                    Task<Void> flow = manager.launchReviewFlow((Activity) mContext, reviewInfo);
+                    flow.addOnCompleteListener(res -> {
+                        // The flow has finished. The API does not indicate whether the user
+                        // reviewed or not, or even whether the review dialog was shown. Thus, no
+                        // matter the result, we continue our app flow.
+                    });
+                }
+            });
+
         }
     }
 }

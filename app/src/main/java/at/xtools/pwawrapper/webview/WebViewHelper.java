@@ -1,14 +1,13 @@
 package at.xtools.pwawrapper.webview;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
@@ -23,6 +22,7 @@ import android.webkit.WebViewClient;
 import java.util.Objects;
 
 import at.xtools.pwawrapper.Constants;
+import at.xtools.pwawrapper.MainActivity;
 import at.xtools.pwawrapper.R;
 import at.xtools.pwawrapper.ui.UIManager;
 
@@ -30,7 +30,7 @@ public class WebViewHelper {
     // Instance variables
     private Activity activity;
     private UIManager uiManager;
-    private WebView webView;
+    public WebView webView;
     private WebSettings webSettings;
 
     public WebViewHelper(Activity activity, UIManager uiManager) {
@@ -38,6 +38,7 @@ public class WebViewHelper {
         this.uiManager = uiManager;
         this.webView = (WebView) activity.findViewById(R.id.webView);
         this.webSettings = webView.getSettings();
+        WebView.setWebContentsDebuggingEnabled(true);
     }
 
     /**
@@ -75,6 +76,7 @@ public class WebViewHelper {
     }
 
     // handles initial setup of webview
+    @SuppressLint("SetJavaScriptEnabled")
     public void setupWebView() {
         // accept cookies
         CookieManager.getInstance().setAcceptCookie(true);
