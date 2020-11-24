@@ -5,6 +5,11 @@ import android.net.Uri;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.google.android.play.core.review.ReviewInfo;
+import com.google.android.play.core.review.ReviewManager;
+import com.google.android.play.core.review.ReviewManagerFactory;
+import com.google.android.play.core.tasks.Task;
+
 import at.xtools.pwawrapper.ui.UIManager;
 import at.xtools.pwawrapper.webview.WebViewHelper;
 
@@ -13,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     private UIManager uiManager;
     private WebViewHelper webViewHelper;
     private boolean intentHandled = false;
+    ReviewManager manager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +78,20 @@ public class MainActivity extends AppCompatActivity {
     // Handle back-press in browser
     @Override
     public void onBackPressed() {
+        manager = ReviewManagerFactory.create(this);
+
+        Task<ReviewInfo> request = manager.requestReviewFlow();
+        request.addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                ReviewInfo reviewInfo = task.getResult();
+                Task<Void> flow = manager.launchReviewFlow(this, reviewInfo);
+                flow.addOnCompleteListener(res -> {
+                    // The flow has finished. The API does not indicate whether the user
+                    // reviewed or not, or even whether the review dialog was shown. Thus, no
+                    // matter the result, we continue our app flow.
+                });
+            }
+        });
         if (!webViewHelper.goBack()) {
             super.onBackPressed();
         }
