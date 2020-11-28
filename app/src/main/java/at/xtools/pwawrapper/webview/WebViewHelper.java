@@ -78,7 +78,7 @@ public class WebViewHelper {
     @SuppressLint("SetJavaScriptEnabled")
     public void setupWebView() {
         // accept cookies
-        CookieManager.getInstance().setAcceptCookie(true);
+        CookieManager.getInstance().setAcceptThirdPartyCookies(webView, true);
         // enable JS
         webSettings.setJavaScriptEnabled(true);
         // must be set for our js-popup-blocker:
@@ -151,9 +151,9 @@ public class WebViewHelper {
     // show "no app found" dialog
     private void showNoAppDialog(Activity thisActivity) {
         new AlertDialog.Builder(thisActivity)
-            .setTitle(R.string.noapp_heading)
-            .setMessage(R.string.noapp_description)
-            .show();
+                .setTitle(R.string.noapp_heading)
+                .setMessage(R.string.noapp_description)
+                .show();
     }
     // handle load errors
     private void handleLoadError(int errorCode) {
