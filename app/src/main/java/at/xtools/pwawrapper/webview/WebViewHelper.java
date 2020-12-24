@@ -81,8 +81,10 @@ public class WebViewHelper {
         CookieManager.getInstance().setAcceptThirdPartyCookies(webView, true);
         // enable JS
         webSettings.setJavaScriptEnabled(true);
+        webSettings.setMediaPlaybackRequiresUserGesture(false);
         // must be set for our js-popup-blocker:
         webSettings.setSupportMultipleWindows(true);
+        WebView.setWebContentsDebuggingEnabled(true);
 
         webSettings.setDomStorageEnabled(true);
         webSettings.setDatabaseEnabled(true);

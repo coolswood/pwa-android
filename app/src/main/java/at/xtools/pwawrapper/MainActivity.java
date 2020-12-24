@@ -115,5 +115,10 @@ public class MainActivity extends AppCompatActivity {
             });
 
         }
+
+        @JavascriptInterface
+        public int androidReleaseVersion() {
+            return Constants.VERSION;
+        }
     }
 }
