@@ -120,5 +120,10 @@ public class MainActivity extends AppCompatActivity {
         public int androidReleaseVersion() {
             return Constants.VERSION;
         }
+
+        @JavascriptInterface
+        public String androidLanguage() {
+            return Constants.LANGUAGE;
+        }
     }
 }
