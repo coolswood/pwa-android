@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @JavascriptInterface
-        public String androidLanguage() {
+        public String language() {
             return Constants.LANGUAGE;
         }
     }
