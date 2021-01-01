@@ -1,4 +1,5 @@
 <resources>
+    <string name="app_name" translatable="false">Journal cognitive therapy</string>
     <string name="offline_heading">You are offline.</string>
     <string name="offline_description">Tap here to retry!</string>
     <string name="noapp_heading">App not found.</string>

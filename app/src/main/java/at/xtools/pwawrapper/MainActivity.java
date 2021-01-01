@@ -7,6 +7,7 @@ import android.net.Uri;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.webkit.JavascriptInterface;
+import java.util.Locale;
 
 import com.google.android.play.core.review.ReviewInfo;
 import com.google.android.play.core.review.ReviewManager;
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private WebViewHelper webViewHelper;
     private boolean intentHandled = false;
     ReviewManager manager;
+    private final String languageName = Locale.getDefault().getLanguage();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
 
         @JavascriptInterface
         public String language() {
-            return Constants.LANGUAGE;
+            return languageName;
         }
     }
 }
