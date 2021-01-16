@@ -15,5 +15,5 @@ public class Constants {
     public static int PROGRESS_THRESHOLD = 100;
     // turn on/off mixed content (both https+http within one page) for API >= 21
     public static boolean ENABLE_MIXED_CONTENT = true;
-    public static int VERSION = 34;
+    public static int VERSION = 38;
 }
