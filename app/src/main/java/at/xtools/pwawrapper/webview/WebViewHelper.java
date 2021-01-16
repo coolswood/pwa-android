@@ -5,9 +5,12 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
@@ -19,6 +22,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import java.net.URISyntaxException;
 import java.util.Objects;
 
 import at.xtools.pwawrapper.Constants;
@@ -138,6 +142,54 @@ public class WebViewHelper {
                     handleLoadError(error.getErrorCode());
                 }
             }
+
+            @SuppressWarnings("deprecation")
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                return handleUrl(webView, url);
+            }
+
+            @TargetApi(Build.VERSION_CODES.N)
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                String url = request.getUrl().toString();
+                return handleUrl(webView, url);
+            }
+
+            public boolean handleUrl(WebView webView, String url) {
+                if (url.startsWith("http")) return false;
+                Uri parsedUri = Uri.parse(url);
+                PackageManager packageManager = activity.getPackageManager();
+                Intent browseIntent = new Intent(Intent.ACTION_VIEW).setData(parsedUri);
+                if (browseIntent.resolveActivity(packageManager) != null) {
+                    activity.startActivity(browseIntent);
+                    return true;
+                }
+                if (url.startsWith("intent:")) {
+                    try {
+                        Intent intent = Intent.parseUri(url, Intent.URI_INTENT_SCHEME);
+                        if (intent.resolveActivity(activity.getPackageManager()) != null) {
+                            activity.startActivity(intent);
+                            return true;
+                        }
+                        String fallbackUrl = intent.getStringExtra("browser_fallback_url");
+                        if (fallbackUrl != null) {
+                            webView.loadUrl(fallbackUrl);
+                            return true;
+                        }
+                        Intent marketIntent = new Intent(Intent.ACTION_VIEW).setData(
+                                Uri.parse("market://details?id=" + intent.getPackage()));
+                        if (marketIntent.resolveActivity(packageManager) != null) {
+                            activity.startActivity(marketIntent);
+                            return true;
+                        }
+                    } catch (URISyntaxException e) {
+
+                    }
+                }
+                return true;
+            }
+
         });
     }
 
