@@ -93,6 +93,10 @@ public class WebViewHelper {
         webSettings.setDomStorageEnabled(true);
         webSettings.setDatabaseEnabled(true);
 
+        String USER_AGENT = webView.getSettings().getUserAgentString().replace(" wv", "");
+
+        webView.getSettings().setUserAgentString(USER_AGENT);
+
         // enable mixed content mode conditionally
         if (Constants.ENABLE_MIXED_CONTENT) {
             webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_COMPATIBILITY_MODE);
