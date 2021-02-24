@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">Дневник когнитивной терапии</string>
+    <string name="app_name" translatable="false">Дневник психологического и эмоционального здоровья</string>
     <string name="offline_heading">Нет сети.</string>
     <string name="offline_description">Нажмите, чтобы повторить!</string>
     <string name="noapp_heading">Приложение не найдено.</string>
