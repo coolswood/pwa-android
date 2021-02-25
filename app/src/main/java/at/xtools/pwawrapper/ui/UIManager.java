@@ -8,11 +8,8 @@ import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.util.TypedValue;
 import android.view.View;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.DecelerateInterpolator;
 import android.webkit.WebView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 
 import at.xtools.pwawrapper.Constants;
 import at.xtools.pwawrapper.R;
@@ -21,14 +18,14 @@ public class UIManager {
     // Instance variables
     private Activity activity;
     private WebView webView;
-    private ProgressBar progressBar;
+//    private ProgressBar progressBar;
     private LinearLayout offlineContainer;
     private LinearLayout launcher;
     private boolean pageLoaded = false;
 
     public UIManager(Activity activity) {
         this.activity = activity;
-        this.progressBar = (ProgressBar) activity.findViewById(R.id.progressBarBottom);
+//        this.progressBar = (ProgressBar) activity.findViewById(R.id.progressBarBottom);
         this.offlineContainer = (LinearLayout) activity.findViewById(R.id.offlineContainer);
         this.webView = (WebView) activity.findViewById(R.id.webView);
         this.launcher = (LinearLayout) activity.findViewById(R.id.launcher);
@@ -47,16 +44,18 @@ public class UIManager {
     public void setLoadingProgress(int progress) {
         // set progress in UI
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            progressBar.setProgress(progress, true);
+            launcher.setVisibility(View.VISIBLE);
+//            progressBar.setProgress(progress, true);
         } else {
-            progressBar.setProgress(progress);
+//            progressBar.setProgress(progress);
         }
 
         // hide ProgressBar if not applicable
         if (progress >= 0 && progress < 100) {
-            progressBar.setVisibility(View.VISIBLE);
+//            progressBar.setVisibility(View.VISIBLE);
         } else {
-            progressBar.setVisibility(View.INVISIBLE);
+//            progressBar.setVisibility(View.INVISIBLE);
+            launcher.setVisibility(View.INVISIBLE);
         }
 
         // get app screen back if loading is almost complete
@@ -67,14 +66,14 @@ public class UIManager {
 
     // Show loading animation screen while app is loading/caching the first time
     public void setLoading(boolean isLoading) {
-//        if (isLoading) {
-//            launcher.setVisibility(View.VISIBLE);
+        if (isLoading) {
+            launcher.setVisibility(View.VISIBLE);
 //            webView.animate().translationX(Constants.SLIDE_EFFECT).alpha(0.5F).setInterpolator(new AccelerateInterpolator()).start();
-//        } else {
+        } else {
 //            webView.setTranslationX(Constants.SLIDE_EFFECT * -1);
 //            webView.animate().translationX(0).alpha(1F).setInterpolator(new DecelerateInterpolator()).start();
-//            launcher.setVisibility(View.INVISIBLE);
-//        }
+            launcher.setVisibility(View.INVISIBLE);
+        }
         pageLoaded = !isLoading;
     }
 
