@@ -59,7 +59,7 @@
         android:orientation="vertical"
         android:background="@color/colorPreloader"
         android:gravity="center"
-        android:visibility="invisible">
+        android:visibility="visible">
 
         <ImageView
             android:layout_width="match_parent"

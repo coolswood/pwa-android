@@ -44,7 +44,7 @@ public class UIManager {
     public void setLoadingProgress(int progress) {
         // set progress in UI
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            launcher.setVisibility(View.VISIBLE);
+//            launcher.setVisibility(View.VISIBLE);
 //            progressBar.setProgress(progress, true);
         } else {
 //            progressBar.setProgress(progress);
@@ -67,7 +67,7 @@ public class UIManager {
     // Show loading animation screen while app is loading/caching the first time
     public void setLoading(boolean isLoading) {
         if (isLoading) {
-            launcher.setVisibility(View.VISIBLE);
+//            launcher.setVisibility(View.VISIBLE);
 //            webView.animate().translationX(Constants.SLIDE_EFFECT).alpha(0.5F).setInterpolator(new AccelerateInterpolator()).start();
         } else {
 //            webView.setTranslationX(Constants.SLIDE_EFFECT * -1);
