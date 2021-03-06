@@ -161,6 +161,12 @@ public class WebViewHelper {
             }
 
             public boolean handleUrl(WebView webView, String url) {
+                if(url.startsWith("https://www.tinkoff.ru")) {
+                    Uri uriUrl = Uri.parse(url);
+                    Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                    activity.startActivity(launchBrowser);
+                    return true;
+                }
                 if (url.startsWith("http")) return false;
                 Uri parsedUri = Uri.parse(url);
                 PackageManager packageManager = activity.getPackageManager();
