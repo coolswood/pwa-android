@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "677163205071",
+    "project_id": "mind-health-1610523879620",
+    "storage_bucket": "mind-health-1610523879620.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:677163205071:android:8be795bcd17fc1e8a912ba",
+        "android_client_info": {
+          "package_name": "com.coffye.mindhealthy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "677163205071-67qlo499t5g068jijc3ips7otip4rcag.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZLfD1uIKQSJGI0-giREIU1rHLplRzXzU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "677163205071-67qlo499t5g068jijc3ips7otip4rcag.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

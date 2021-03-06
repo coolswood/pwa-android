@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 30
@@ -6,9 +7,10 @@ android {
         applicationId "com.coffye.mindhealthy"
         minSdkVersion 24
         targetSdkVersion 30
-        versionCode 44
-        versionName "44"
+        versionCode 46
+        versionName "46"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         release {
@@ -28,6 +30,9 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation platform('com.google.firebase:firebase-bom:26.5.0')
+    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-messaging'
     testImplementation 'junit:junit:4.12'
     implementation 'com.google.android.play:core:1.8.3'
 }
