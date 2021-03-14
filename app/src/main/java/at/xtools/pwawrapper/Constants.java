@@ -3,7 +3,7 @@ package at.xtools.pwawrapper;
 public class Constants {
     public Constants(){}
     // Root page
-    public static String WEBAPP_URL = "https://mind-healthy.ru/";//test url
+    public static String WEBAPP_URL = "https://mind-health.ru/";//test url
     public static String WEBAPP_HOST = "mind-health.ru"; // used for checking Intent-URLs
 
 	// Constants
@@ -15,5 +15,5 @@ public class Constants {
     public static int PROGRESS_THRESHOLD = 100;
     // turn on/off mixed content (both https+http within one page) for API >= 21
     public static boolean ENABLE_MIXED_CONTENT = true;
-    public static int VERSION = 47;
+    public static int VERSION = 70;
 }

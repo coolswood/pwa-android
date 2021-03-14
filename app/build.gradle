@@ -7,8 +7,8 @@ android {
         applicationId "com.coffye.mindhealthy"
         minSdkVersion 24
         targetSdkVersion 30
-        versionCode 69
-        versionName "69"
+        versionCode 70
+        versionName "70"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         vectorDrawables.useSupportLibrary = true
     }
