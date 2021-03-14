@@ -7,8 +7,8 @@ android {
         applicationId "com.coffye.mindhealthy"
         minSdkVersion 24
         targetSdkVersion 30
-        versionCode 47
-        versionName "47"
+        versionCode 69
+        versionName "69"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         vectorDrawables.useSupportLibrary = true
     }
@@ -33,6 +33,11 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:26.5.0')
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-messaging'
+
+    def billing_version = "3.0.0"
+
+    implementation "com.android.billingclient:billing:$billing_version"
+
     testImplementation 'junit:junit:4.12'
     implementation 'com.google.android.play:core:1.8.3'
 }
